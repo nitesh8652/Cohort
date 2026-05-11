@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SunMall – Grilled Potato Chips</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <svg class="sun-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="8" fill="#f5a623"/>
+      <line x1="18" y1="2" x2="18" y2="7" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="18" y1="29" x2="18" y2="34" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="2" y1="18" x2="7" y2="18" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="29" y1="18" x2="34" y2="18" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="6.1" y1="6.1" x2="9.65" y2="9.65" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="26.35" y1="26.35" x2="29.9" y2="29.9" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="29.9" y1="6.1" x2="26.35" y2="9.65" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="9.65" y1="26.35" x2="6.1" y2="29.9" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <span class="logo-text">SunMall</span>
+  </div>
+
+  <ul class="nav-menu">
+    <li class="nav-item active">
+      <a href="#">HOME</a>
+      <span class="nav-dots"><span></span><span></span></span>
+    </li>
+    <li class="nav-item"><a href="#">ABOUT</a></li>
+    <li class="nav-item"><a href="#">CHIPS</a></li>
+    <li class="nav-item"><a href="#">SERVICES</a></li>
+    <li class="nav-item"><a href="#">CONTACT</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="search-wrap">
+      <svg class="search-svg" viewBox="0 0 20 20" fill="none">
+        <circle cx="8.5" cy="8.5" r="5.5" stroke="#888" stroke-width="1.8"/>
+        <line x1="12.5" y1="12.5" x2="17" y2="17" stroke="#888" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <input class="search-input" type="text" placeholder="Search for chips..." />
+    </div>
+    <div class="cart-wrap">
+      <svg class="cart-svg" viewBox="0 0 24 24" fill="none">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="#1a1a1a" stroke-width="1.8" stroke-linejoin="round"/>
+        <line x1="3" y1="6" x2="21" y2="6" stroke="#1a1a1a" stroke-width="1.8"/>
+        <path d="M16 10a4 4 0 01-8 0" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span class="cart-badge">4</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+
+  <!-- Scattered decorative elements -->
+  <div class="deco deco-tri-orange"></div>
+  <div class="deco deco-tri-teal"></div>
+  <div class="deco deco-tri-green-sm"></div>
+  <div class="deco deco-dot-orange-tl"></div>
+  <div class="deco deco-dot-green-tr"></div>
+  <div class="deco deco-dot-row-r"></div>
+  <div class="deco deco-spark-1"></div>
+  <div class="deco deco-spark-2"></div>
+  <div class="deco deco-spark-3"></div>
+
+  <div class="hero-grid">
+
+    <!-- ── LEFT ── -->
+    <div class="hero-left">
+      <div class="badge-ingredients">
+        <svg class="badge-star-svg" viewBox="0 0 14 14" fill="none">
+          <polygon points="7,1 8.8,5.2 13,5.7 9.9,8.6 10.9,13 7,10.8 3.1,13 4.1,8.6 1,5.7 5.2,5.2" fill="#3e8f1e"/>
+        </svg>
+        <span>100% REAL INGREDIENTS</span>
+      </div>
+
+      <h1 class="hero-heading">
+        EAT OUR<br/>
+        <span class="heading-green">GRILLED</span><br/>
+        POTATO CHIPS
+      </h1>
+
+      <p class="hero-sub">
+        Satisfying savory Chinese meat sauce chips<br/>
+        without any hard-to-find ingredients.
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-add-cart">
+          <svg viewBox="0 0 22 22" fill="none" width="18" height="18">
+            <circle cx="9" cy="18" r="1.5" fill="white"/>
+            <circle cx="17" cy="18" r="1.5" fill="white"/>
+            <path d="M1 1h3l2.68 11.39a2 2 0 001.94 1.61h7.72a2 2 0 001.94-1.51L20 6H6" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          ADD TO CART
+        </button>
+        <div class="quantity-ctrl">
+          <button class="qty-btn">−</button>
+          <span class="qty-val">2</span>
+          <button class="qty-btn">+</button>
+        </div>
+      </div>
+
+      <div class="hero-features">
+        <div class="feat-item">
+          <div class="feat-icon feat-natural">
+            <svg viewBox="0 0 22 22" fill="none" width="18" height="18">
+              <path d="M11 2C6 2 2 6 2 11c0 5 4 9 9 9s9-4 9-9" stroke="#3e8f1e" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M11 2c2 3 3 6 0 9" stroke="#3e8f1e" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M20 2s-3 1-5 5" stroke="#3e8f1e" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feat-txt">
+            <strong>100% NATURAL</strong>
+            <span>No artificial flavors</span>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon feat-grilled">
+            <svg viewBox="0 0 22 22" fill="none" width="18" height="18">
+              <path d="M11 2c-2 3-2 5 0 7s2 5 0 7" stroke="#f57c00" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 4c-1.5 2.5-1.5 4 0 6s1.5 3.5 0 5" stroke="#f57c00" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M15 4c1.5 2.5 1.5 4 0 6s-1.5 3.5 0 5" stroke="#f57c00" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feat-txt">
+            <strong>OVEN GRILLED</strong>
+            <span>Not fried</span>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon feat-tasty">
+            <svg viewBox="0 0 22 22" fill="none" width="18" height="18">
+              <path d="M11 20l-7-7a5 5 0 017-7 5 5 0 017 7z" fill="#e74c3c" stroke="#e74c3c" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="feat-txt">
+            <strong>TASTY & CRUNCHY</strong>
+            <span>Irresistible bite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CENTER ── -->
+    <div class="hero-center">
+      <!-- Background glow circle -->
+      <div class="bag-glow"></div>
+
+      <!-- CRISPY & label -->
+
+
+      <!-- CSS chip bag art -->
+      <div class="chip-bag">
+   <img src="lays.png" />
+    </div>
+
+    <!-- ── RIGHT ── -->
+    <div class="hero-right">
+      <div class="flavor-option">
+        <div class="flavor-circle fl-chili">
+          <svg viewBox="0 0 28 28" fill="none" width="22" height="22">
+            <path d="M14 4c0 0 4 2 4 7s-3 6-3 9" stroke="#ff6b35" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 8c0 0-3 3-3 7s3 5 3 7" stroke="#ff6b35" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="14" cy="22" rx="5" ry="3" fill="#ff6b35" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="flavor-text">
+          <h4>EXTRA CHILI</h4>
+          <p>Zha jiang mian is crazy hot even when it's simplified</p>
+        </div>
+      </div>
+      <div class="flavor-option">
+        <div class="flavor-circle fl-beef">
+          <svg viewBox="0 0 28 28" fill="none" width="20" height="20">
+            <ellipse cx="14" cy="16" rx="8" ry="5" fill="#c0392b" opacity="0.8"/>
+            <path d="M6 11c0-3 3.6-5 8-5s8 2 8 5" fill="#e74c3c"/>
+            <ellipse cx="14" cy="11" rx="8" ry="5" fill="#e74c3c"/>
+          </svg>
+        </div>
+        <div class="flavor-text">
+          <h4>BEEF FLAVOUR</h4>
+          <p>Comes with a lot extra energy calories and Cripen</p>
+        </div>
+      </div>
+      <div class="flavor-option">
+        <div class="flavor-circle fl-smokey">
+          <svg viewBox="0 0 28 28" fill="none" width="20" height="20">
+            <path d="M14 4c-2 3-2 5 0 7s2 5 0 7" stroke="#ff9f43" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 7c-1.5 2.5-1.5 4 0 6s1.5 3.5 0 5" stroke="#ff9f43" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19 7c1.5 2.5 1.5 4 0 6s-1.5 3.5 0 5" stroke="#ff9f43" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="flavor-text">
+          <h4>SMOKEY SAUCE</h4>
+          <p>The meat sauce is kind of reminiscent of a Chinese.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-grid -->
+</section>
+
+<!-- ═══════════════════════ TOP FLAVOURS ═══════════════════════ -->
+<section class="top-flavours">
+  <div class="flavours-inner">
+
+    <div class="flavours-heading-col">
+      <p class="flavours-sup">OUR TOP</p>
+      <h2 class="flavours-title">FLAVOURS</h2>
+      <div class="flavours-arrows">
+        <button class="arr-btn">
+          <svg viewBox="0 0 20 20" fill="none" width="16" height="16">
+            <path d="M13 4L7 10l6 6" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="arr-btn">
+          <svg viewBox="0 0 20 20" fill="none" width="16" height="16">
+            <path d="M7 4l6 6-6 6" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flavour-cards-row">
+
+      <!-- Card 1: Black Barbecue -->
+      <div class="flavour-card">
+        <div class="fc-img-wrap">
+            <img src="lays2.png" />
+        </div>
+        <div class="fc-info">
+          <h4 class="fc-name">BLACK BARBECUE</h4>
+          <div class="fc-stars">
+            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+            <span class="fc-rating">(4.8)</span>
+          </div>
+          <div class="fc-price">$12.30</div>
+          <button class="fc-order-btn">ORDER NOW &nbsp;→</button>
+        </div>
+      </div>
+
+      <!-- Card 2: Mr. Potato -->
+      <div class="flavour-card">
+        <div class="fc-img-wrap">
+               <img src="lays2.png" />
+        </div>
+        <div class="fc-info">
+          <h4 class="fc-name">MR. POTATO</h4>
+          <div class="fc-stars">
+            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+            <span class="fc-rating">(4.9)</span>
+          </div>
+          <div class="fc-price">$15.89</div>
+          <button class="fc-order-btn">ORDER NOW &nbsp;→</button>
+        </div>
+      </div>
+
+      <!-- Card 3: Tom Yomm -->
+      <div class="flavour-card">
+        <div class="fc-img-wrap">
+          <img src="lays2.png" />
+        </div>
+        <div class="fc-info">
+          <h4 class="fc-name">TOM YOMM</h4>
+          <div class="fc-stars">
+            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+            <span class="fc-rating">(4.7)</span>
+          </div>
+          <div class="fc-price">$11.50</div>
+          <button class="fc-order-btn">ORDER NOW &nbsp;→</button>
+        </div>
+      </div>
+
+    </div><!-- /flavour-cards-row -->
+  </div>
+</section>
+
+</body>
+</html>
