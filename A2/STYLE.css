@@ -1,0 +1,438 @@
+/* ══════════════════════════════════════════
+   SCALEX  –  style.css
+   Uses: display:flex, position:relative,
+         position:absolute, spacing/alignment
+   ══════════════════════════════════════════ */
+
+/* ── Reset & Variables ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #111111;
+  --surface:     #1c1c1c;
+  --border:      #2a2a2a;
+  --accent:      #f04e23;
+  --accent-hover:#d94218;
+  --white:       #ffffff;
+  --muted:       #888888;
+  --card-radius: 14px;
+  --font-display:'Syne', sans-serif;
+  --font-body:   'DM Sans', sans-serif;
+  --nav-h:       64px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════
+   NAVBAR
+   Uses: display:flex, position:fixed (sticky)
+   ══════════════════════════ */
+.navbar {
+  position: relative;           /* parent for mobile-menu absolute */
+  background: rgba(17,17,17,0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.nav-inner {
+  display: flex;                /* ← display:flex */
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: var(--nav-h);
+  padding: 0 2rem;
+}
+
+/* Logo */
+.logo {
+  display: flex;                /* ← display:flex on logo */
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.logo-icon {
+  width: 28px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;                /* ← display:flex on nav links */
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.25s;
+  position: relative;           /* ← position:relative for underline */
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;           /* ← position:absolute for animated underline */
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--white);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* CTA Button */
+.btn-cta {
+  display: flex;
+  align-items: center;
+  padding: 9px 22px;
+  background: var(--surface);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+
+.btn-cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Hamburger (mobile) */
+.hamburger {
+  display: none;                /* hidden on desktop */
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;                /* toggled by JS */
+  flex-direction: column;
+  gap: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  position: absolute;           /* ← position:absolute – drops below navbar */
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  z-index: 99;
+  padding: 1rem 2rem;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--white); }
+.btn-cta-mobile {
+  margin-top: 0.6rem;
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
+/* ══════════════════════════
+   HERO
+   Uses: position:relative, position:absolute (blobs)
+   ══════════════════════════ */
+.hero {
+  position: relative;           /* ← position:relative – contains blobs */
+  overflow: hidden;
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+}
+
+/* Decorative background blobs */
+.blob {
+  position: absolute;           /* ← position:absolute – decorative blobs */
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(240,78,35,0.18) 0%, transparent 70%);
+  top: -140px;
+  left: -80px;
+}
+
+.blob-2 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(240,78,35,0.12) 0%, transparent 70%);
+  top: -100px;
+  right: -60px;
+}
+
+.hero-title {
+  position: relative;           /* ← position:relative – sits above blobs */
+  z-index: 1;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.2rem, 7vw, 7.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  display: flex;                /* ← display:flex on title for word layout */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3em;
+}
+
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.7s ease forwards;
+  animation-delay: calc(var(--i) * 0.15s);
+}
+
+.amp { color: var(--accent); }
+
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════
+   FILTER TABS
+   Uses: display:flex
+   ══════════════════════════ */
+.filter-section {
+  display: flex;                /* ← display:flex for centering */
+  justify-content: center;
+  padding: 1.6rem 2rem 0.8rem;
+}
+
+.filter-tabs {
+  display: flex;                /* ← display:flex – tabs row */
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 5px;
+}
+
+.tab {
+  padding: 8px 22px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+
+.tab:hover { color: var(--white); }
+
+.tab.active {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* ══════════════════════════
+   BLOG GRID
+   Uses: display:flex (grid rows), position:relative/absolute (cards)
+   ══════════════════════════ */
+.blog-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.4rem 2rem 4rem;
+}
+
+.blog-grid {
+  display: flex;                /* ← display:flex – main grid */
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;           /* ← position:relative – card parent */
+  flex: 1 1 280px;              /* flex-grow, flex-shrink, flex-basis */
+  max-width: calc(33.33% - 1rem);
+  background: var(--surface);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.32s cubic-bezier(.22,.68,0,1.2),
+              border-color 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #444;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Card image container */
+.card-img-wrap {
+  position: relative;           /* ← position:relative – image + overlay */
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.06);
+}
+
+/* Gradient overlay on image */
+.card-overlay {
+  position: absolute;           /* ← position:absolute – overlay on image */
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(10,10,10,0.65) 100%
+  );
+  pointer-events: none;
+}
+
+/* Card body */
+.card-body {
+  display: flex;                /* ← display:flex for card content layout */
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;         /* ← inline-flex for badge */
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+.badge-tech       { background: rgba(240,78,35,0.15);  color: #f4845f; }
+.badge-saas       { background: rgba(99,190,120,0.15); color: #63be78; }
+.badge-marketing  { background: rgba(130,110,255,0.15);color: #9b8fff; }
+
+/* Card title */
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+/* Card date */
+.card-date {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+/* ── Card hidden state (filter) ── */
+.card.hidden {
+  display: none;
+}
+
+/* ── Card enter animation ── */
+.card.animate-in {
+  animation: cardPop 0.4s ease forwards;
+}
+
+@keyframes cardPop {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Empty state ── */
+.empty-state {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  color: var(--muted);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.empty-state.visible {
+  display: flex;
+}
+

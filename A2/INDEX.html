@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ScaleX – Insights & Blogs</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+
+      <a href="#" class="logo">
+        <svg class="logo-icon" viewBox="0 0 28 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 11L7 0H14L7 11L14 22H7L0 11Z" fill="white"/>
+          <path d="M14 11L21 0H28L21 11L28 22H21L14 11Z" fill="white" opacity="0.55"/>
+        </svg>
+        <span>ScaleX</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link active">Home</a></li>
+        <li><a href="#" class="nav-link">About Us</a></li>
+        <li><a href="#" class="nav-link">Blogs</a></li>
+        <li><a href="#" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <a href="#" class="btn-cta">Get Started</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Blogs</a>
+      <a href="#">Contact Us</a>
+      <a href="#" class="btn-cta-mobile">Get Started</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <h1 class="hero-title">
+      <span class="word" style="--i:0">Insights</span>
+      <span class="word amp" style="--i:1">&amp;</span>
+      <span class="word" style="--i:2">Blogs</span>
+    </h1>
+  </section>
+
+  <section class="filter-section">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="tech">Tech</button>
+      <button class="tab" data-filter="saas">SaaS</button>
+      <button class="tab" data-filter="marketing">Marketing</button>
+    </div>
+  </section>
+
+  <main class="blog-section">
+    <div class="blog-grid" id="blogGrid">
+
+      <article class="card" data-category="tech">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80" alt="Martini glass" class="card-img"/>
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="badge badge-tech">Tech</span>
+          <h2 class="card-title">The Ultimate Guide To SaaS Marketing</h2>
+          <p class="card-date">May 23, 2025</p>
+        </div>
+      </article>
+
+      <article class="card" data-category="saas">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=600&q=80" alt="Chair" class="card-img"/>
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="badge badge-saas">SaaS</span>
+          <h2 class="card-title">5 Key Trends In SaaS Growth For 2025</h2>
+          <p class="card-date">May 23, 2025</p>
+        </div>
+      </article>
+
+      <article class="card" data-category="marketing">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" alt="Cat" class="card-img"/>
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-body">
+          <span class="badge badge-marketing">Marketing</span>
+          <h2 class="card-title">How Data-Driven Strategies Are Important</h2>
+          <p class="card-date">May 23, 2025</p>
+        </div>
+      </article>
+
+
+
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <p>No posts in this category yet.</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
