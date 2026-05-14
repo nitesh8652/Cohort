@@ -75,6 +75,17 @@ body {
   position: relative;
 }
 
+.card.stat-card.awards {
+    position: relative;
+    height: 587px;
+    top: 18px;
+    width: 269px;
+}
+
+.exo{
+    display: flex;
+}
+
 .about-card {
   grid-column: 1;
   grid-row: 1 / 4;
@@ -183,12 +194,13 @@ body {
 }
 
 .badge-circle {
-  position: relative;
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 152px;
 }
 
 .badge-circle svg {
@@ -281,12 +293,13 @@ body {
 }
 
 .stat-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 18px 20px;
-  gap: 2px;
+    width: 261px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 20px;
+    gap: 2px;
 }
 
 .stat-num {
@@ -306,6 +319,7 @@ body {
 }
 
 .projects {
+        width: 271px;
   grid-column: 3;
   grid-row: 2;
   background: var(--teal);
@@ -359,9 +373,15 @@ body {
   letter-spacing: 0.03em;
 }
 
-.orb-card {
-  grid-column: 3;
+.exo {
+  grid-column: 3 / 5;
   grid-row: 3;
+  display: flex;
+  gap: var(--gap);
+}
+
+.orb-card {
+  flex: 1;
   background: var(--black-card);
   display: flex;
   align-items: center;
@@ -403,8 +423,7 @@ body {
 }
 
 .awards-big-card {
-  grid-column: 4;
-  grid-row: 3;
+  flex: 1;
   background: var(--yellow);
   display: flex;
   flex-direction: column;
