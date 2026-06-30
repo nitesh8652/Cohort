@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinTrack Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Login Screen -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="logo">$</div>
+    <h1>FinTrack Pro</h1>
+    <p>Your personal finance tracker</p>
+    <input type="text" id="loginName" placeholder="Enter your name" maxlength="50" autocomplete="off">
+    <button class="btn-login" id="loginBtn">Get Started</button>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="app">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="navbar-brand">
+      <div class="logo-icon">$</div>
+      <span>FinTrack Pro</span>
+    </a>
+    <div class="nav-links">
+      <button class="active" data-page="dashboard">Dashboard</button>
+      <button data-page="settings">Settings</button>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-primary" id="addTransactionBtn">
+        <span>+</span>
+        <span>Add</span>
+      </button>
+      <button class="btn-secondary" id="logoutBtn">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Dashboard Section -->
+  <section class="section active" id="dashboardSection">
+    <div class="container">
+      <div class="summary-cards">
+        <div class="summary-card card-balance">
+          <div class="card-header">
+            <span class="card-label">Current Balance</span>
+            <div class="card-icon">$</div>
+          </div>
+          <div class="card-value" id="balanceValue">$0.00</div>
+          <div class="card-sub">Net worth</div>
+        </div>
+        <div class="summary-card card-income">
+          <div class="card-header">
+            <span class="card-label">Total Income</span>
+            <div class="card-icon">↑</div>
+          </div>
+          <div class="card-value" id="incomeValue">$0.00</div>
+          <div class="card-sub">All time</div>
+        </div>
+        <div class="summary-card card-expense">
+          <div class="card-header">
+            <span class="card-label">Total Expenses</span>
+            <div class="card-icon">↓</div>
+          </div>
+          <div class="card-value" id="expenseValue">$0.00</div>
+          <div class="card-sub">All time</div>
+        </div>
+        <div class="summary-card card-count">
+          <div class="card-header">
+            <span class="card-label">Transactions</span>
+            <div class="card-icon">#</div>
+          </div>
+          <div class="card-value" id="countValue">0</div>
+          <div class="card-sub">Total entries</div>
+        </div>
+      </div>
+
+      <div class="chart-section">
+        <h3>Cash Flow</h3>
+        <div class="chart-wrapper">
+          <canvas id="cashFlowChart"></canvas>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="income">Income</button>
+        <button class="filter-btn" data-filter="expense">Expense</button>
+      </div>
+
+      <div class="table-section">
+        <div class="table-header">
+          <h3>Transaction History</h3>
+          <span class="table-count" id="tableCount">0 entries</span>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody">
+            </tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="emptyState">
+          <p>No transactions yet. Click "Add" to get started.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Settings Section -->
+  <section class="section" id="settingsSection">
+    <div class="container">
+      <div class="settings-section">
+        <h2>Settings</h2>
+        <p>Customize your FinTrack Pro experience</p>
+
+        <div class="settings-card">
+          <h3>Display Name</h3>
+          <p class="setting-desc">Change how your name appears in the app.</p>
+          <input type="text" id="displayNameInput" placeholder="Enter your name" maxlength="50">
+        </div>
+
+        <div class="settings-card">
+          <h3>Currency</h3>
+          <p class="setting-desc">Select your preferred currency symbol.</p>
+          <select id="currencySelect">
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="INR">₹ INR</option>
+            <option value="JPY">¥ JPY</option>
+          </select>
+        </div>
+
+        <div class="settings-card">
+          <div class="setting-row">
+            <div class="setting-info">
+              <h3>Dark Mode</h3>
+              <p class="setting-desc" style="margin-bottom:0">Toggle between light and dark theme.</p>
+            </div>
+            <div class="setting-control">
+              <label class="toggle-switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-card danger-zone">
+          <h3>Reset All Data</h3>
+          <p class="setting-desc">Permanently delete all transactions and settings. This cannot be undone.</p>
+          <button class="btn-danger" id="resetDataBtn">Reset All Data</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Add Transaction Modal -->
+<div class="modal-overlay" id="transactionModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Add Transaction</h2>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Type</label>
+        <div class="type-toggle">
+          <button class="type-btn active-income" data-type="income">Income</button>
+          <button class="type-btn" data-type="expense">Expense</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="descriptionInput">Description</label>
+        <input type="text" id="descriptionInput" placeholder="e.g. Groceries, Freelance payment" maxlength="100">
+        <div class="form-error" id="descriptionError">Description is required.</div>
+      </div>
+      <div class="form-group">
+        <label for="amountInput">Amount</label>
+        <input type="number" id="amountInput" placeholder="0.00" min="0.01" step="0.01">
+        <div class="form-error" id="amountError">Amount must be a positive number.</div>
+      </div>
+      <div class="form-group">
+        <label for="dateInput">Date</label>
+        <input type="date" id="dateInput">
+        <div class="form-error" id="dateError">Please select a date.</div>
+      </div>
+      <div class="form-group">
+        <label for="categorySelect">Category</label>
+        <select id="categorySelect">
+          <option value="">Select a category</option>
+          <option value="Food & Dining">Food & Dining</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Recharge & Bills">Recharge & Bills</option>
+          <option value="Petrol & Auto">Petrol & Auto</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Salary">Salary</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">Other</option>
+        </select>
+        <div class="form-error" id="categoryError">Please select a category.</div>
+      </div>
+      <div class="form-footer">
+        <button class="btn-cancel" id="modalCancel">Cancel</button>
+        <button class="btn-save" id="modalSave">Save Transaction</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
