@@ -1,10 +1,3 @@
-/* ===================================================================
-   FOCUS DECK — tokens
-   Signature: a progress "ring" motif reused everywhere — the brand
-   mark, every dashboard card, and the timer are all built from the
-   same arc, standing in for a day that fills up as you move through it.
-=================================================================== */
-
 :root {
   --font-display: 'Sora', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
@@ -67,8 +60,6 @@ button, input {
 
 ::selection { background: var(--accent-soft); }
 
-/* ===================== dynamic background layer ===================== */
-/* Time-of-day gradient sitting behind the app, quietly shifting the room's light. */
 .bg-layer {
   position: fixed;
   inset: 0;
@@ -105,7 +96,6 @@ html[data-theme="light"] .bg-layer.period-night      { background: radial-gradie
   min-height: 100vh;
 }
 
-/* ============================= topbar ============================= */
 .topbar {
   display: flex;
   align-items: center;
@@ -169,7 +159,6 @@ html[data-theme="light"] .bg-layer.period-night      { background: radial-gradie
 html[data-theme="dark"] .icon-sun { display: block; }
 html[data-theme="light"] .icon-moon { display: block; }
 
-/* ============================= dashboard ============================= */
 .dashboard { padding: 8px 4px 0; }
 .dashboard-intro { margin-bottom: 30px; }
 .eyebrow {
@@ -229,7 +218,6 @@ html[data-theme="light"] .icon-moon { display: block; }
   margin: 0;
 }
 
-/* ============================= feature views ============================= */
 .feature-view {
   display: none;
   padding-top: 8px;
@@ -290,7 +278,6 @@ html[data-theme="light"] .icon-moon { display: block; }
 
 .feature-hint { color: var(--text-muted); font-size: 13px; margin: -12px 0 20px; }
 
-/* ---- shared: input rows ---- */
 .input-row { display: flex; gap: 10px; margin-bottom: 20px; }
 .input-row input {
   flex: 1;
@@ -316,7 +303,6 @@ html[data-theme="light"] .icon-moon { display: block; }
 }
 .input-row button:hover { filter: brightness(1.08); }
 
-/* ---- shared: task / goal lists ---- */
 .task-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .task-item {
   display: flex;
@@ -363,7 +349,6 @@ html[data-theme="light"] .icon-moon { display: block; }
 .empty-state { color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px 0; display: none; }
 .empty-state.visible { display: block; }
 
-/* ---- goals: progress bar ---- */
 .progress-bar {
   height: 8px;
   background: var(--surface-2);
@@ -379,7 +364,6 @@ html[data-theme="light"] .icon-moon { display: block; }
   transition: width 0.5s var(--ease);
 }
 
-/* ---- planner slots ---- */
 .slot-list { display: flex; flex-direction: column; gap: 6px; }
 .slot-row {
   display: flex;
@@ -415,7 +399,6 @@ html[data-theme="light"] .icon-moon { display: block; }
 .slot-input:focus { border-color: var(--accent); }
 .slot-input::placeholder { color: var(--text-muted); opacity: 0.6; }
 
-/* ---- pomodoro ---- */
 .timer-ring-wrap { position: relative; margin: 10px 0 28px; }
 #timerRingFill { transition: stroke-dasharray 1s linear; }
 .timer-display {
@@ -464,7 +447,6 @@ html[data-theme="light"] .icon-moon { display: block; }
 }
 .mode-btn.active { border-color: var(--accent-2); color: var(--accent-2); background: var(--accent-2-soft); }
 
-/* ---- motivation ---- */
 .quote-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -494,7 +476,6 @@ html[data-theme="light"] .icon-moon { display: block; }
 .quote-card.loading .quote-text { opacity: 0.4; }
 .quote-card.error .quote-text { color: var(--danger); }
 
-/* ============================= responsive ============================= */
 @media (max-width: 560px) {
   .app { padding: 16px 16px 48px; }
   .topbar { padding-bottom: 20px; }
@@ -504,7 +485,6 @@ html[data-theme="light"] .icon-moon { display: block; }
   .feature-header h2 { font-size: 19px; }
 }
 
-/* ============================= motion preference ============================= */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }

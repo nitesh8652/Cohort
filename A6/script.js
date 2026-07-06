@@ -103,18 +103,15 @@ function tickClock() {
   bgLayer.className = 'bg-layer period-' + period.key;
   periodLabel.textContent = period.label;
 
-
   const dayProgress = Math.max(0, Math.min(100, ((h - 6) * 60 + now.getMinutes()) / (17 * 60) * 100));
   if (brandProgress) setRing(brandProgress, dayProgress);
 }
-
-
 
 const themeToggle = document.getElementById('themeToggle');
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  saveJSON('pd_theme_raw', theme); 
+  saveJSON('pd_theme_raw', theme);
   localStorage.setItem('pd_theme', theme);
 }
 
@@ -122,7 +119,6 @@ themeToggle.addEventListener('click', () => {
   const current = document.documentElement.getAttribute('data-theme');
   applyTheme(current === 'dark' ? 'light' : 'dark');
 });
-
 
 const TODO_KEY = 'pd_todos';
 const todoForm = document.getElementById('todoForm');
@@ -170,7 +166,6 @@ todoForm.addEventListener('submit', (e) => {
   renderTodos();
 });
 
-
 todoList.addEventListener('click', (e) => {
   const btn = e.target.closest('button[data-action]');
   if (!btn) return;
@@ -186,16 +181,15 @@ todoList.addEventListener('click', (e) => {
   renderTodos();
 });
 
-
-
 const PLANNER_KEY = 'pd_planner';
 const slotList = document.getElementById('slotList');
 const plannerCount = document.getElementById('plannerCount');
 const plannerMeta = document.getElementById('plannerMeta');
 
-let plannerData = loadJSON(PLANNER_KEY, {}); 
+let plannerData = loadJSON(PLANNER_KEY, {});
 const PLANNER_START_HOUR = 6;
-const PLANNER_END_HOUR = 22; 
+const PLANNER_END_HOUR = 22; // inclusive
+
 function formatHour(h) {
   const ampm = h >= 12 ? 'PM' : 'AM';
   const h12 = h % 12 === 0 ? 12 : h % 12;
@@ -237,7 +231,6 @@ function updatePlannerMeta() {
   const now = plannerData[currentHour];
   plannerMeta.textContent = filled === 0 ? 'Plan your hours' : (now ? `Now: ${now}` : `${filled} hour${filled === 1 ? '' : 's'} planned`);
 }
-
 
 const GOALS_KEY = 'pd_goals';
 const goalForm = document.getElementById('goalForm');
@@ -299,7 +292,6 @@ goalsList.addEventListener('click', (e) => {
   renderGoals();
 });
 
-
 const timerTime = document.getElementById('timerTime');
 const timerLabel = document.getElementById('timerLabel');
 const timerRingFill = document.getElementById('timerRingFill');
@@ -313,7 +305,7 @@ const pomodoroRing = document.querySelector('[data-ring="pomodoro"]');
 
 let workMinutes = 25;
 const BREAK_MINUTES_MAP = { 25: 5, 45: 10, 50: 10 };
-let sessionType = 'work'; 
+let sessionType = 'work'; // 'work' | 'break'
 let totalSeconds = workMinutes * 60;
 let secondsLeft = totalSeconds;
 let intervalId = null;
@@ -335,7 +327,7 @@ function renderTimer() {
   pomodoroSessionLabel.textContent = sessionType === 'work' ? 'Work session' : 'Break';
   const total = currentSessionMinutes() * 60;
   const elapsedPct = total === 0 ? 0 : ((total - secondsLeft) / total) * 100;
-  setRing(timerRingFill, 100 - elapsedPct); 
+  setRing(timerRingFill, 100 - elapsedPct);
   setRing(pomodoroRing, elapsedPct);
   pomodoroMeta.textContent = `${formatMMSS(secondsLeft)} · ${isRunning ? 'Running' : (secondsLeft === total ? 'Ready' : 'Paused')}`;
   document.title = isRunning ? `${formatMMSS(secondsLeft)} — Focus Deck` : 'Focus Deck — Productivity Dashboard';
@@ -354,7 +346,7 @@ function playChime() {
     osc.connect(gain).connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.9);
-  } catch (e) 
+  } catch (e) { }
 }
 
 function startTimer() {
@@ -408,8 +400,6 @@ timerModes.addEventListener('click', (e) => {
   resetTimer();
 });
 
-
-
 const quoteCard = document.getElementById('quoteCard');
 const quoteText = document.getElementById('quoteText');
 const quoteAuthor = document.getElementById('quoteAuthor');
@@ -441,7 +431,6 @@ async function fetchQuote() {
 }
 
 newQuoteBtn.addEventListener('click', fetchQuote);
-
 
 const weatherIcon = document.getElementById('weatherIcon');
 const weatherTemp = document.getElementById('weatherTemp');
@@ -486,7 +475,7 @@ async function resolveLocationName(lat, lon) {
 }
 
 function initWeather() {
-  const fallback = { lat: 51.5074, lon: -0.1278, label: 'Bhopal' }; 
+  const fallback = { lat: 51.5074, lon: -0.1278, label: 'Bhopal' };
 
   if (!('geolocation' in navigator)) {
     loadWeather(fallback.lat, fallback.lon, fallback.label);
@@ -506,8 +495,6 @@ function initWeather() {
     { timeout: 8000 }
   );
 }
-
-
 
 function init() {
   renderTodos();
