@@ -11,16 +11,12 @@ const App = () => {
 
   return (
     <>
+      {/* <Navbar setIscartOpen={setIscartOpen} /> */}
       <Navbar setIsCartOpen={setIscartOpen} />
 
-      {
-        setIscartOpen ? (
 
-          <Products />
-        ) : (
-          <Cart />
-        )
-      }
+
+      {IscartOpen ? <Cart /> : <Products />}
 
     </>
   )
