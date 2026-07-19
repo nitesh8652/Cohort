@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import axios from 'axios'
 import { store } from '../context/Context'
+import Card from './Card';
 
 const Home = () => {
 
@@ -10,7 +11,8 @@ const Home = () => {
 
     try {
 
-      let res = await fetch('https://fakestoreapi.com/products')
+      let res = await axios.get('https://fakestoreapi.com/products')
+      setProductsData(res.data)
       console.log(res)
 
     } catch (err) {
@@ -18,10 +20,20 @@ const Home = () => {
     }
   }
 
-  getProductsData()
+  useEffect(() => {
+    getProductsData()
+  },[])
 
   return (
-    <div>Home</div>
+    <div>
+      
+      {
+        productsData.map((val)=>{
+          return <Card key={val.id} product={val}/>
+        })
+      }
+
+    </div>
   )
 }
 
