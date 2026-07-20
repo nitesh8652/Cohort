@@ -6,10 +6,10 @@ const App = () => {
 
 
     <>
-    <BrowserRouter>
-    
+      <BrowserRouter>
+
         <MyRoutes />
-    </BrowserRouter>
+      </BrowserRouter>
     </>
 
   )
