@@ -1,5 +1,6 @@
 import { Zap, Package, Users, Star, Truck, ShieldCheck, HeartHandshake, BadgeCheck, ArrowRight } from "lucide-react"
 import Navbar from "./Navbar"
+import Footer from "./Footer"
 
 const StatCard = ({ icon: Icon, value, subtitle }) => (
   <div className="bg-[#111111] border border-white/[0.12] rounded-3xl p-8 h-[170px] flex flex-col items-center justify-center text-center hover:-translate-y-[6px] hover:border-lime-300 hover:shadow-xl transition-all duration-300">
@@ -107,6 +108,7 @@ const About = () => {
           </button>
         </section>
       </div>
+      <Footer/>
     </div>
   )
 }

@@ -1,10 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router"
 import { Zap, User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react"
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+
+
+
 
   return (
     <div className="min-h-screen bg-[#0B0B0B] font-['Inter',sans-serif] flex items-center justify-center px-4 relative overflow-hidden">
