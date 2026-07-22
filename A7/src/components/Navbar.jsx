@@ -38,13 +38,16 @@ const Navbar = ({ activePage = "Home" }) => {
           </span>
         </div>
 
-        <button className="w-12 h-12 rounded-xl border border-white/[0.12] flex items-center justify-center text-[#A1A1AA]">
+        <NavLink to="/cart" className="w-12 h-12 rounded-xl border border-white/[0.12] flex items-center justify-center text-[#A1A1AA] hover:border-[#D9FF00]/50 transition-all duration-300">
           <ShoppingCart className="w-5 h-5" />
-        </button>
+        </NavLink>
+
+<NavLink to='/'>
 
         <button className="w-12 h-12 rounded-xl border border-white/[0.12] flex items-center justify-center text-[#A1A1AA]">
           <LogOut className="w-5 h-5" />
         </button>
+</NavLink>
       </div>
     </nav>
   )

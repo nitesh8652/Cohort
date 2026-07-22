@@ -3,25 +3,19 @@ import Footer from "./Footer"
 import Navbar from "./Navbar"
 import ProductCard from "./ProductCard"
 import axios from "axios"
-import { useContext, useEffect } from "react"
-import { useState } from "react"
-import ContextProvider from "../context/Context"
+import { useContext, useEffect, useState } from "react"
 import { store } from "../context/Context"
 
-const categories = ["All", "Electronics", "Fashion", "Home & Living", "Beauty", "Sports"]
+const Shop = () => {
 
-const Shop = () => {    
-
-  let {products, setProducts} = useContext(store)
-
-  // const [products, setProducts] = useState([])
+  let { products, setProducts } = useContext(store)
+  const {selectedCategory, setSelectedCategory} = useContext(store)
+  const [search, setSearch] = useState('')
 
   let fetchProducts = async () => {
 
     try {
       let res = await axios.get('https://fakestoreapi.com/products')
-
-      console.log('data', res.data)
       setProducts(res.data)
 
     } catch (err) {
@@ -46,30 +40,43 @@ const Shop = () => {
               type="text"
               placeholder="Search products..."
               className="w-full h-11 pl-10 pr-4 rounded-xl bg-[#1A1A1A] border border-white/[0.1] text-[#F5F5F5] text-sm outline-none focus:border-[#D9FF00]/50 transition-colors placeholder:text-[#A1A1AA]"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value)
+                setSelectedCategory('all')
+              }}
             />
           </div>
 
           <div className="relative w-full sm:w-44">
-            <select className="w-full h-11 pl-4 pr-10 rounded-xl bg-[#1A1A1A] border border-white/[0.1] text-[#F5F5F5] text-sm outline-none appearance-none cursor-pointer focus:border-[#D9FF00]/50 transition-colors">
-              {categories.map((cat) => (
-                <option key={cat} value={cat} className="bg-[#1A1A1A] text-[#F5F5F5]">{cat}</option>
+
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full h-11 pl-4 pr-10 rounded-xl bg-[#1A1A1A] border border-white/[0.1] text-[#F5F5F5] text-sm outline-none appearance-none cursor-pointer focus:border-[#D9FF00]/50 transition-colors">
+              <option value='all'>All</option>
+              {[...new Set(products.map(p => p.category))].map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
+
+
+
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A1A1AA] pointer-events-none" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-
-
-              {
-                products.map((val)=>{
-                  return <ProductCard key={val.id} title={val.title} price={val.price} image={val.image}/>
-                })
-              }
-
-        </div>
-      </div>
+          {
+            products.filter(p => {
+              const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase())
+              const matchesCategory = selectedCategory === "all" || p.category === selectedCategory
+              return matchesSearch && matchesCategory
+            }).map((val) => {
+              return <ProductCard key={val.id} id={val.id} title={val.title} price={val.price} image={val.image} rating={val.rating.rate} category={val.category} />
+            })
+          }
+        </div>      </div>
       <Footer />
     </div>
   )

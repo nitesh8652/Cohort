@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
-import { Link } from "react-router"
+import { useEffect, useState, useContext } from "react"
+import { Link, NavLink } from "react-router"
 import { Zap, User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react"
+import { store } from "../context/Context"
+
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const { user , setUser } = useContext(store)
 
 
+console.log(User);
 
 
 
@@ -34,7 +38,9 @@ const Register = () => {
             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#A1A1AA]" />
             <input
               id="fullName"
+             
               type="text"
+              required='True'
               placeholder="Full name"
               autoComplete="name"
               className="w-full h-14 bg-[#1A1A1A] border border-white/10 rounded-xl pl-12 pr-4 text-[#F5F5F5] placeholder-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#D9FF00] focus:border-transparent hover:border-[#D9FF00]/60 transition-all duration-300"
@@ -45,6 +51,7 @@ const Register = () => {
             <label htmlFor="email" className="sr-only">Email address</label>
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#A1A1AA]" />
             <input
+              required='True'
               id="email"
               type="email"
               placeholder="Email address"
@@ -57,6 +64,7 @@ const Register = () => {
             <label htmlFor="password" className="sr-only">Password</label>
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#A1A1AA]" />
             <input
+              required='True'
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="Password (min 6 chars)"
@@ -77,6 +85,7 @@ const Register = () => {
             <label htmlFor="confirmPassword" className="sr-only">Confirm password</label>
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#A1A1AA]" />
             <input
+              required='True'
               id="confirmPassword"
               type={showConfirmPassword ? "text" : "password"}
               placeholder="Confirm password"
@@ -93,13 +102,17 @@ const Register = () => {
             </button>
           </div>
 
-          <button
-            type="submit"
-            className="w-full h-14 bg-[#D9FF00] text-black font-semibold text-lg rounded-xl flex items-center justify-center gap-2 hover:brightness-105 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,255,0,0.25)] active:scale-95 transition-all duration-300"
-          >
-            Create Account
-            <ArrowRight className="w-[18px] h-[18px]" />
-          </button>
+          <NavLink to='/home'>
+
+
+            <button
+              type="submit"
+              className="w-full h-14 bg-[#D9FF00] text-black font-semibold text-lg rounded-xl flex items-center justify-center gap-2 hover:brightness-105 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,255,0,0.25)] active:scale-95 transition-all duration-300"
+            >
+              Create Account
+              <ArrowRight className="w-[18px] h-[18px]" />
+            </button>
+          </NavLink>
         </form>
 
         <p className="text-center text-[#A1A1AA] mt-8">
