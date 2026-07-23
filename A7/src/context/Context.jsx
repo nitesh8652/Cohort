@@ -42,9 +42,14 @@ const ContextProvider = ({ children }) => {
 
     const cartTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState(()=>{
+        const saved = localStorage.getItem('user')
+        return saved ? JSON.parse(saved) : null
+    })
 
-    return (
+     const [fullname, setFullname] = useState('')
+
+    return (            
         <store.Provider
             value={{
                 products,
@@ -57,7 +62,9 @@ const ContextProvider = ({ children }) => {
                 updateQty,
                 cartTotal,
                 user,
-                setUser
+                setUser,
+                fullname,
+                setFullname
             }}
         >
 

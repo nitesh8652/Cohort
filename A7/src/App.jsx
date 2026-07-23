@@ -8,7 +8,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <MyRoutes />
-        <ToastContainer position="bottom-right" theme="dark" />
+        <ToastContainer position="top-right" theme="dark" />
       </BrowserRouter>
     </>
   )

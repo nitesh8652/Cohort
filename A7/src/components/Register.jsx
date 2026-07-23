@@ -1,18 +1,55 @@
 import { useEffect, useState, useContext } from "react"
-import { Link, NavLink } from "react-router"
+import { Link, Navigate } from "react-router"
 import { Zap, User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react"
 import { store } from "../context/Context"
+import { nanoid } from 'nanoid'
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router"
 
 
 const Register = () => {
+
+  const navigate = useNavigate()
+
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const { user , setUser } = useContext(store)
+  const { user, setUser } = useContext(store)
+
+  // const [fullname, setFullname] = useState('')
+
+  const { fullname, setFullname } = useContext(store)
+
+  const [email, setEmail] = useState('')
+  const [newUser, setNewUser] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (password !== confirmPassword) {
+      toast.error("Passwords Don't Match")
+      return
+    }
+
+    const newUser = {
+      id: nanoid(),
+      fullname,
+      email,
+      password
+    }
+
+    setUser(newUser)
+    localStorage.setItem('user', JSON.stringify(newUser))
+    toast.success('Account Created Successfully')
+    console.log(user)
+    console.log(newUser)
+
+    navigate('/home')
 
 
-console.log(User);
-
-
+  }
 
   return (
     <div className="min-h-screen bg-[#0B0B0B] font-['Inter',sans-serif] flex items-center justify-center px-4 relative overflow-hidden">
@@ -38,7 +75,8 @@ console.log(User);
             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#A1A1AA]" />
             <input
               id="fullName"
-             
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
               type="text"
               required='True'
               placeholder="Full name"
@@ -53,6 +91,8 @@ console.log(User);
             <input
               required='True'
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Email address"
               autoComplete="email"
@@ -66,6 +106,8 @@ console.log(User);
             <input
               required='True'
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type={showPassword ? "text" : "password"}
               placeholder="Password (min 6 chars)"
               autoComplete="new-password"
@@ -85,6 +127,8 @@ console.log(User);
             <label htmlFor="confirmPassword" className="sr-only">Confirm password</label>
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#A1A1AA]" />
             <input
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required='True'
               id="confirmPassword"
               type={showConfirmPassword ? "text" : "password"}
@@ -102,17 +146,18 @@ console.log(User);
             </button>
           </div>
 
-          <NavLink to='/home'>
 
 
-            <button
-              type="submit"
-              className="w-full h-14 bg-[#D9FF00] text-black font-semibold text-lg rounded-xl flex items-center justify-center gap-2 hover:brightness-105 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,255,0,0.25)] active:scale-95 transition-all duration-300"
-            >
-              Create Account
-              <ArrowRight className="w-[18px] h-[18px]" />
-            </button>
-          </NavLink>
+
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-full h-14 bg-[#D9FF00] text-black font-semibold text-lg rounded-xl flex items-center justify-center gap-2 hover:brightness-105 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,255,0,0.25)] active:scale-95 transition-all duration-300"
+          >
+            Create Account
+            <ArrowRight className="w-[18px] h-[18px]" />
+          </button>
+
         </form>
 
         <p className="text-center text-[#A1A1AA] mt-8">

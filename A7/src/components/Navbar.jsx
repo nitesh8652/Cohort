@@ -1,7 +1,12 @@
 import { Zap, ShoppingCart, LogOut } from "lucide-react"
 import { NavLink } from "react-router-dom"
+import { useContext } from "react"
+import { store } from "../context/Context"
 
 const Navbar = ({ activePage = "Home" }) => {
+
+  const {fullname, setFullname} = useContext(store)
+
   return (
     <nav className="h-[72px] flex items-center justify-between rounded-2xl px-4 border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-300">
       <div className="flex items-center gap-3">
@@ -34,7 +39,7 @@ const Navbar = ({ activePage = "Home" }) => {
           </div>
 
           <span className="text-[#F5F5F5] text-sm font-medium">
-            Clipsync
+            {fullname}
           </span>
         </div>
 

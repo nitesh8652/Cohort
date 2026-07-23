@@ -1,12 +1,43 @@
 import { useState } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { Zap, Mail, Lock, Eye, ArrowRight } from "lucide-react"
 import { Navigate } from "react-router"
+import { toast } from "react-toastify"
+import { useContext } from "react"
+import { store } from "../context/Context"
 
 
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
+    const navigate = useNavigate()
+    const { setUser } = useContext(store)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const saved = localStorage.getItem('user')
+        if (!saved) {
+            navigate('/register')
+            toast.error('Please Register First')
+            return
+        }
+
+        const storedUser = JSON.parse(saved)
+        if (storedUser.email === email && storedUser.password === password) {
+            toast.success('Login Successful')
+            setUser(storedUser)
+            navigate('/home')
+        } else {
+            toast.error('Invalid email or password')
+        }
+
+    }
+
+
 
     return (
         <div className="min-h-screen bg-[#0B0B0B] font-['Inter',sans-serif] flex flex-col lg:flex-row">
@@ -58,6 +89,8 @@ const Login = () => {
                     <div className="relative mb-4">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A1A1AA]" />
                         <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             type="email"
                             placeholder="Email address"
                             className="w-full h-14 bg-[#1A1A1A] border border-white/10 rounded-xl pl-12 pr-4 text-[#F5F5F5] placeholder-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#D9FF00] hover:border-[#D9FF00]/60 transition-all duration-300"
@@ -69,6 +102,8 @@ const Login = () => {
                         <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A1A1AA]" />
                         <input
                             type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                             className="w-full h-14 bg-[#1A1A1A] border border-white/10 rounded-xl pl-12 pr-12 text-[#F5F5F5] placeholder-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#D9FF00] hover:border-[#D9FF00]/60 transition-all duration-300"
                         />
@@ -83,7 +118,9 @@ const Login = () => {
                     </div>
 
                     {/* Login Button */}
-                    <button className="w-full h-14 bg-[#D9FF00] text-black font-semibold text-lg rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,255,0,0.25)] transition-all duration-300">
+                    <button
+                        onClick={handleLogin}
+                        className="w-full h-14 bg-[#D9FF00] text-black font-semibold text-lg rounded-xl flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,255,0,0.25)] transition-all duration-300">
                         Sign in
                         <ArrowRight className="w-5 h-5" />
                     </button>
