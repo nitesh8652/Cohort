@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Zap, ShoppingCart, LogOut } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import { useContext } from "react"
@@ -5,7 +6,18 @@ import { store } from "../context/Context"
 
 const Navbar = ({ activePage = "Home" }) => {
 
-  const {fullname, setFullname} = useContext(store)
+  const { fullname, setFullname } = useContext(store)
+  const navigate = useNavigate()
+
+
+
+
+  const logout = () => {
+    localStorage.removeItem("user")
+    navigate('/')
+  }
+
+
 
   return (
     <nav className="h-[72px] flex items-center justify-between rounded-2xl px-4 border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-300">
@@ -47,12 +59,13 @@ const Navbar = ({ activePage = "Home" }) => {
           <ShoppingCart className="w-5 h-5" />
         </NavLink>
 
-<NavLink to='/'>
 
-        <button className="w-12 h-12 rounded-xl border border-white/[0.12] flex items-center justify-center text-[#A1A1AA]">
+        <button 
+        onClick={logout}
+        className="w-12 h-12 rounded-xl border border-white/[0.12] flex items-center justify-center text-[#A1A1AA]">
           <LogOut className="w-5 h-5" />
         </button>
-</NavLink>
+
       </div>
     </nav>
   )
