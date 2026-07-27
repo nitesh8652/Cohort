@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { deleteProject } from "./projects.slice";
 
 const loadNotes = () => {
   try {
@@ -28,9 +29,23 @@ const notesSlice = createSlice({
         updateNote: (state, action) => {
             const idx = state.findIndex(n => n.id === action.payload.id)
             if (idx !== -1) state[idx] = { ...state[idx], ...action.payload }
+        },
+        moveNoteToProject: (state, action) => {
+            const note = state.find(n => n.id === action.payload.noteId)
+            if (note) note.projectId = action.payload.projectId
+        },
+        clearNotes: () => {
+            return []
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(deleteProject, (state, action) => {
+            state.forEach(note => {
+                if (note.projectId === action.payload) note.projectId = null
+            })
+        })
     }
 })
 
-export const {addNote, deleteNote, togglePin, updateNote} = notesSlice.actions
+export const {addNote, deleteNote, togglePin, updateNote, moveNoteToProject, clearNotes} = notesSlice.actions
 export default notesSlice.reducer
