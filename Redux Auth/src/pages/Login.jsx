@@ -13,7 +13,7 @@ const Login = () => {
         <h1 className="text-2xl font-semibold text-gray-900 text-center mb-1">Welcome back</h1>
         <p className="text-sm text-gray-500 text-center mb-8">Sign in to your account</p>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(loginForm)}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
@@ -43,9 +43,7 @@ const Login = () => {
           </div>
 
           <button
-            onClick={handleSubmit(loginForm)}
             type="submit"
-            className="w-full py-2 rounded-md bg-blue-600 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Sign in
           </button>

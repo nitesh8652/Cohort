@@ -7,6 +7,7 @@ import { useState } from "react";
 export const useAuth = () => {
 
     let navigate = useNavigate()
+    const dispatch = useDispatch()
 
     let {
         register,
@@ -22,22 +23,24 @@ export const useAuth = () => {
         
         let arr = [...registerUsers, data]
         setRegisterUsers(arr)
-        localStorage.setItem("registeresUsers",JSON.stringify(arr))
-        alert("successfully login ")
+        localStorage.setItem("registeredUsers",JSON.stringify(arr))
+        alert("successfully registered ")
         console.log(arr)
     }
 
     const loginForm =(data) =>{
         
-        let loginUser = registeredUsers.find((val)=>{
+        let loginUser = registerUsers.find((val)=>{
             return val.email === data.email && val.password === data.password
         })
 
         if(!loginUser){
             alert("invalid credentials")
+            return
         }
 
         dispatch(addUser(loginUser))
+        localStorage.setItem("loginUser", JSON.stringify(loginUser))
         alert("login successfull")  
         reset()
 
@@ -53,5 +56,6 @@ export const useAuth = () => {
         handleSubmit,
         errors,
         registerForm,
+        loginForm,
     }
 }

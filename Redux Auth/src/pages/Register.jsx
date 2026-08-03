@@ -11,7 +11,7 @@ function Register() {
         <h1 className="text-2xl font-semibold text-gray-900 text-center mb-1">Create an account</h1>
         <p className="text-sm text-gray-500 text-center mb-8">Start your free trial</p>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(registerForm)}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <input
@@ -61,9 +61,7 @@ function Register() {
           </div>
 
           <button
-            onClick={handleSubmit(registerForm)}
             type="submit"
-            className="w-full py-2 rounded-md bg-blue-600 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Create account
           </button>
