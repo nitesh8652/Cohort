@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from '../features/auth/state/authSlice'
+import MEOW from '../features/counterSlice'
+import authentication from '../features/authslice'
 
-export const store = configureStore({
-    reducer: {
-        authSlice:authReducer
-    },
+export default configureStore({
+    reducer:{
+         counter: MEOW,
+         auth: authentication
+    }
 })
