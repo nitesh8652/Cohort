@@ -9,7 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
 
-    let { register, handleSubmit, errors, onLoginSubmit } = useAuth()
+    let { register, handleSubmit, errors, onLoginSubmit, navigate } = useAuth()
   
   //   const onSubmit = async (data) => {
   //   console.log("Login Data:", data);
@@ -386,6 +386,7 @@ const Login = () => {
           Don't have an account?{" "}
 
           <button
+          onClick={()=> navigate('/register')}
             type="button"
             className="
               font-semibold

@@ -11,9 +11,9 @@ import { useAuth } from "../../hooks/useAuth";
 
 const Register = () => {
 
-    let { register, handleSubmit, errors, onRegisterSubmit } = useAuth()
+    let { register, handleSubmit, errors, onRegisterSubmit, navigate } = useAuth()
 
-    const password = watch("password", "");
+    const password = ("password", "");
 
     const getPasswordStrength = () => {
         if (!password) return 0;
@@ -391,19 +391,19 @@ const Register = () => {
                                         },
                                     })}
                                     className={`
-                    h-[53px]
-                    w-full
-                    rounded-[7px]
-                    border
-                    bg-[#18161c]
-                    pl-11
-                    pr-4
-                    text-[12px]
-                    outline-none
-                    transition
-                    placeholder:text-white/25
+                                            h-[53px]
+                                            w-full
+                                            rounded-[7px]
+                                            border
+                                            bg-[#18161c]
+                                            pl-11
+                                            pr-4
+                                            text-[12px]
+                                            outline-none
+                                            transition
+                                            placeholder:text-white/25
 
-                    ${errors.password
+                                        ${errors.password
                                             ? "border-red-500/70"
                                             : "border-white/10 focus:border-[#9d7ae8]"
                                         }
@@ -428,22 +428,22 @@ const Register = () => {
 
                                     <div
                                         className="
-                      h-[3px]
-                      flex-1
-                      overflow-hidden
-                      rounded-full
-                      bg-white/10
-                    "
+                                                h-[3px]
+                                                flex-1
+                                                overflow-hidden
+                                                rounded-full
+                                                bg-white/10
+                                                "
                                     >
                                         <div
                                             className={`
-                        ${strengthWidth[strength]}
-                        h-full
-                        rounded-full
-                        bg-[#b99aff]
-                        transition-all
-                        duration-300
-                      `}
+                                                    ${strengthWidth[strength]}
+                                                    h-full
+                                                    rounded-full
+                                                    bg-[#b99aff]
+                                                    transition-all
+                                                    duration-300
+                                                     `}
                                         />
                                     </div>
 
@@ -463,11 +463,11 @@ const Register = () => {
 
                             <label
                                 className="
-                  flex
-                  cursor-pointer
-                  items-center
-                  gap-3
-                "
+                                        flex
+                                        cursor-pointer
+                                        items-center
+                                        gap-3
+                                        "
                             >
                                 <input
                                     type="checkbox"
@@ -476,10 +476,10 @@ const Register = () => {
                                             "You must accept the terms",
                                     })}
                                     className="
-                    h-[17px]
-                    w-[17px]
-                    accent-[#9674dc]
-                  "
+                                            h-[17px]
+                                            w-[17px]
+                                            accent-[#9674dc]
+                                        "
                                 />
 
                                 <span className="text-[10px] text-white/60">
@@ -511,22 +511,22 @@ const Register = () => {
                             type="submit"
                             // disabled={isSubmitting}
                             className="
-                mt-2
-                h-[52px]
-                w-full
-                rounded-[7px]
-                bg-gradient-to-r
-                from-[#8c68cd]
-                to-[#c5a6fb]
-                text-[12px]
-                font-semibold
-                text-[#130f19]
-                transition
-                hover:brightness-110
-                active:scale-[0.99]
-                disabled:cursor-not-allowed
-                disabled:opacity-60
-              "
+                                        mt-2
+                                        h-[52px]
+                                        w-full
+                                        rounded-[7px]
+                                        bg-gradient-to-r
+                                        from-[#8c68cd]
+                                        to-[#c5a6fb]
+                                        text-[12px]
+                                        font-semibold
+                                        text-[#130f19]
+                                        transition
+                                        hover:brightness-110
+                                        active:scale-[0.99]
+                                        disabled:cursor-not-allowed
+                                        disabled:opacity-60
+                                    "
                         >
                             {/* {isSubmitting
                                 ? "Creating Account..."
@@ -542,11 +542,11 @@ const Register = () => {
 
                         <span
                             className="
-                text-[8px]
-                uppercase
-                tracking-wider
-                text-white/25
-              "
+                                        text-[8px]
+                                        uppercase
+                                        tracking-wider
+                                        text-white/25
+                                    "
                         >
                             Or continue with
                         </span>
@@ -562,19 +562,19 @@ const Register = () => {
                         <button
                             type="button"
                             className="
-                flex
-                h-[52px]
-                items-center
-                justify-center
-                gap-2
-                rounded-[7px]
-                border
-                border-white/10
-                text-[11px]
-                font-medium
-                transition
-                hover:bg-white/[0.04]
-              "
+                                    flex
+                                    h-[52px]
+                                    items-center
+                                    justify-center
+                                    gap-2
+                                    rounded-[7px]
+                                    border
+                                    border-white/10
+                                    text-[11px]
+                                    font-medium
+                                    transition
+                                    hover:bg-white/[0.04]
+                                "
                         >
                             {/* Google SVG */}
                             <svg
@@ -610,19 +610,19 @@ const Register = () => {
                         <button
                             type="button"
                             className="
-                flex
-                h-[52px]
-                items-center
-                justify-center
-                gap-2
-                rounded-[7px]
-                border
-                border-white/10
-                text-[11px]
-                font-medium
-                transition
-                hover:bg-white/[0.04]
-              "
+                                    flex
+                                    h-[52px]
+                                    items-center
+                                    justify-center
+                                    gap-2
+                                    rounded-[7px]
+                                    border
+                                    border-white/10
+                                    text-[11px]
+                                    font-medium
+                                    transition
+                                    hover:bg-white/[0.04]
+                                "
                         >
                             <Command
                                 size={15}
@@ -637,22 +637,25 @@ const Register = () => {
                     {/* LOGIN */}
                     <p
                         className="
-              mt-12
-              text-center
-              text-[10px]
-              text-white/40
-            "
+                                mt-12
+                                text-center
+                                text-[10px]
+                                text-white/40
+                                "
                     >
                         Already have an account?{" "}
 
                         <button
+
+                            onClick={() => navigate('/')}
                             type="button"
+
                             className="
-                font-semibold
-                text-[#b591ff]
-                transition
-                hover:text-[#d0baff]
-              "
+                                    font-semibold
+                                    text-[#b591ff]
+                                    transition
+                                    hover:text-[#d0baff]
+                                "
                         >
                             Log In
                         </button>

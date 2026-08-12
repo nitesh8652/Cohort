@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {axiosInstance} from '../../../../app/config/axiosInstance'
 
-let loginEmployee = createAsyncThunk(
+export let loginEmployee = createAsyncThunk(
 
     "auth/login",
     async (credentials, thunkapi) => {
