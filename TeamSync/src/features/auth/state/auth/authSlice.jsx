@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginEmployee } from "./authAction";
 
 let authSlice = createSlice({
     name:'auth',
@@ -15,7 +16,15 @@ let authSlice = createSlice({
             state.employee = null
             state.isLoading = false;
         }
+    },
+
+    extraReducers: (builder) => {
+        builder.addCase(loginEmployee.pending, (state) => {
+            state.isLoading = true;
+        })
+        
     }
+
 })
 
 let {addEmployee, removeEmployee} = authSlice.actions
