@@ -41,23 +41,63 @@ const fetchall = async (req, res) => {
     }
 }
 
-const noteid =  async (req, res) => {
+const noteid = async (req, res) => {
     try {
         let noteId = req.params.id
         let note = await NotesModel.findById(noteId)
 
         res.status(200).json({
             message: "notes found",
-            data : note
+            data: note
         })
 
-    } catch (error){
+    } catch (error) {
         console.log("error in id fetching", error)
+    }
+}
+
+const updatedNotesController = async (req, res) => {
+    try {
+
+        let noteId = req.params.id
+        let body = req.body
+
+        let updateNotes = await NotesModel.findByIdAndUpdate(noteId, body)
+
+        return res.status(200).json({
+            
+            message: "success to update notes",
+            data: updateNotes
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Failed to update notes",
+        })
+    }
+}
+
+const deletenotes = async(req,res) =>{
+    try{
+        let noteId = req.params.id
+     
+        await NotesModel.findByIdAndDelete(noteId)
+
+        return res.status(200).json({
+            message: "success to delete notes",
+            // data:noteId
+        })
+    }catch(error){
+        console.log("error deleting",error)
+        return res.status(500).json({
+            message: "Failed to delete notes",
+        })
     }
 }
 
 module.exports = {
     createNotesController,
+    updatedNotesController,
     fetchall,
+    deletenotes,
     noteid
 }
