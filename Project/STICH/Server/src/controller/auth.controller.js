@@ -41,7 +41,7 @@ export async function register(req, res) {
         userId: user._id,
         role: user.role
     })
-
+    
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true
     })

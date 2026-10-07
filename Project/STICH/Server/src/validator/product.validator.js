@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, validationResult } from "express-validator";
 
 export const createProductValidator = [
     body("title")
@@ -19,18 +19,28 @@ export const createProductValidator = [
         .isString().withMessage("currency must be a string value")
         .isIn(["INR", "USD"]).withMessage('INR OR USD'),
     body("clothInfo")
-        .exists().withMessage("Cloth Info is required")
-        .isString().withMessage("clothinfo must be a string")
-        .trim
-        .isAlpha('en-US', { ignore: " " }).withMessage("Character only have alfabet no special character"),
-    body("clothInfo.size")
-        .exists().withMessage("Cloth Size is required")
-        .isIn(["XS", "S", "M", "L", "XL", "XXL"]).withMessage('INR OR USD')
-        .isString().withMessage("Size must be a string")
+        .exists().withMessage("Cloth Info is required").bail()
+        .isArray().withMessage("Size must be an array object"),
+    body("clothInfo.*.size")
+        .exists().withMessage("Cloth Size is required").bail()
+        .isString().withMessage("Size must be a string").bail()
+        .isIn(["XS", "S", "M", "L", "XL", "XXL"]).withMessage('INR OR USD').bail()
         .trim,
-    body("clothInfo.stock")
-        .isNumeric({ min: 0 })
-        .exists().withMessage("Cloth Size is required")
+    body("clothInfo.*.stock")
+        .exists().withMessage("Cloth Size is required").bail()
+        .isInt({ min: 0 }).withMessage("Must be an valid integer").bail(),
+
+    (req, res, next) => {
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                message: "invalid request",
+                errors: errors.array()
+            })
+        }
+        next()
+    }
 
 
 
