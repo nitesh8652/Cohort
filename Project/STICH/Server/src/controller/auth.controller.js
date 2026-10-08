@@ -41,7 +41,7 @@ export async function register(req, res) {
         userId: user._id,
         role: user.role
     })
-    
+
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true
     })
@@ -198,8 +198,8 @@ export async function getMe(req, res) {
         data: {
             user: {
                 email: user.email,
-                name:user.name,
-                id:user._id
+                name: user.name,
+                id: user._id
             }
         }
 
