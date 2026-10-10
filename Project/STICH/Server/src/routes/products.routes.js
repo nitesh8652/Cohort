@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { createProductValidator } from "../validator/product.validator"
-import { authenticate } from "../middleware/auth.middleware"
+import { createProductValidator } from "../validator/product.validator.js"
+import { authenticate } from "../middleware/auth.middleware.js"
+import {createProduct} from '../controller/product.controller.js'
 
 const router = Router()
 
@@ -13,6 +14,6 @@ router.post("/",authenticate, (req, res, next) =>{
     }
 
     next()
-},)
+}, createProduct)
 
 export default router
