@@ -39,4 +39,18 @@ export async function createProduct(req, res) {
         }
     })
 
+
+}
+
+export async function listAllProducts (req,res) {
+
+    const products = await productModel.find()
+
+    res.status(200).json({
+        message:"products data fetched",
+        data:{
+            products
+        }
+    })
+
 }

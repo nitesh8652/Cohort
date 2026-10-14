@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { createProductValidator } from "../validator/product.validator.js"
 import { authenticate } from "../middleware/auth.middleware.js"
-import { createProduct } from '../controller/product.controller.js'
+import { createProduct, listAllProducts } from '../controller/product.controller.js'
 import multer from "multer"
 
 const upload = multer({ storage: multer.memoryStorage(),
@@ -29,6 +29,8 @@ router.post("/", authenticate, (req, res, next) => {
     req.body?.sizes && (req.body.price = JSON.parse(req.body.sizes))
     next()
 }, createProduct)
+
+router.get("/",authenticate, listAllProducts)
 
 export default router
 
