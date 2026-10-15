@@ -5,19 +5,28 @@ export async function createProduct(req, res) {
     console.log(req.body)
     console.log(req.files)
 
-    const filesUrls = []
+    const files = req.files ?? []
 
-    for (let i = 0; i < req.files.length; i++) {
-        const response = await uploadFile({
-            buffer: req.files[i].buffer,
-            fileName: req.files[i].originalname
-        })
-        console.log(response)
+    // for (let i = 0; i < req.files.length; i++) {
+    //     const response = await uploadFile({
+    //         buffer: req.files[i].buffer,
+    //         fileName: req.files[i].originalname
+    //     })
+    //     console.log(response)
 
-        filesUrls.push(response.url)
+    //     filesUrls.push(response.url)
 
-    }
-    console.log(filesUrls)
+    // }
+
+    const uploads = await Promise.all(
+        files.map(file => uploadFile({
+            buffer:file.buffer, 
+            fileName:file.originalname
+        }))
+    )
+
+    const filesUrls = uploadFile.map(u => u.url)
+
 
     const product =  await productModel.create({
         title:req.body.title,
@@ -35,7 +44,7 @@ export async function createProduct(req, res) {
     res.status(201).json({
         message:"Product created successfully",
         data:{
-            products 
+            product
         }
     })
 

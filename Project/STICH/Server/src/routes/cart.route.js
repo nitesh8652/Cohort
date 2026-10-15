@@ -9,3 +9,4 @@ const router = Router()
 router.post("/", authenticate, cartValidator, addToCart)
 
 export default router
+

@@ -12,7 +12,7 @@ export async function addToCart(req, res) {
         })
     }
 
-    let cart = await cartModel.findOne({ user: req.user.userId })
+    const cart = (await cartModel.findone({ user: req.user.userId })) ?? await cartModel.create({ user: req.user.userId })
 
     if (!cart) {
         cart = new cartModel({ user: req.user.userId, products: [] })
@@ -36,4 +36,59 @@ export async function addToCart(req, res) {
             cart
         }
     })
+
+
+    const productInCart = cart.product.find(p => p.product.toString() === productId)
+
+    if (productInCart) {
+        if ((productInCart.quantity) > selectedSize.stock) {
+            return res.status(400).json({
+
+                message: "Insufficient STOCK!!! "
+
+            })
+        }
+        await cartModel.updateOne(
+            {
+                user: req.user.userId,
+                "products.product": productId,
+                "products.size": size,
+            }, {
+            $inc: {
+                "products.$.quantity": quantity
+            }
+        }
+        )
+    }
+
+    await cartModel.findOneAndUpdate({
+        user: req.user.userId
+    }, {
+        $push: {
+            products: {
+                product: productId,
+                quantity: quantity,
+                size: size
+            }
+        }
+    })
+
+    return res.status(200).json({
+        message: "product added to cart successfully"
+    })
+
+}
+
+
+export async function getCart(req, res) {
+    const cart = (await cartModel.findOne({ user: req.user.userId })) ??
+        (await cartModel.create({ user: req.user.userId }))
+
+
+        return res.status(200).json({
+            message:"cart retrived successfully",
+            data:{
+                cart: cart
+            }
+        })
 }
