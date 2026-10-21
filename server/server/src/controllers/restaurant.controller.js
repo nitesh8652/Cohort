@@ -177,11 +177,69 @@ async function getRestaurantRevenue(req, res) {
   });
 }
 
-export {
+async function getTopCustomers(req, res) {
+  const { id } = req.params.id;
+
+  const response = await Order.aggregate([
+    [
+      {
+        '$match': {
+          'restaurant': mongoose.Types.ObjectId(id),
+          'status': 'delivered'
+        }
+      }, {
+        '$group': {
+          '_id': '$customer',
+          'totalrevenue': {
+            '$sum': '$totalAmount'
+          },
+          'totalOrder': {
+            '$sum': 1
+          }
+        }
+      }, {
+        '$sort': {
+          'totalrevenue': -1
+        }
+      }, {
+        '$lookup': {
+          'from': 'users',
+          'localField': '_id',
+          'foreignField': '_id',
+          'as': 'users',
+          'pipeline': [
+            {
+              '$project': {
+                'name': 1,
+                'email': 1,
+                '_id': 0
+              }
+            }
+          ]
+        }
+      }, {
+        '$unwind': {
+          'path': '$users',
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$limit': 2
+      }
+    ]
+  ])
+
+  return res.json({
+    message: "Top Customers",
+    topCustomers: response 
+  })
+}
+
+export {  
   getRestaurants,
   getRestaurantById,
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
   getRestaurantRevenue,
-};
+  getTopCustomers,
+};  

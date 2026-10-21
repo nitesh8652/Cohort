@@ -6,6 +6,7 @@ import {
   updateRestaurant,
   deleteRestaurant,
   getRestaurantRevenue,
+  getTopCustomers
 } from "../controllers/restaurant.controller.js";
 import { getMenu, createMenuItem, updateMenuItem, deleteMenuItem } from "../controllers/menu.controller.js";
 import { getRestaurantOrders } from "../controllers/order.controller.js";
@@ -34,5 +35,7 @@ router.get("/:id/orders", authUser, authorize("owner"), getRestaurantOrders);
 router.get("/:id/reviews", getRestaurantReviews);
 
 router.get("/:id/revenue", authUser, authorize("owner"), getRestaurantRevenue);
+
+router.get("/:id/top-customers", authUser, authorize("owner"), getTopCustomers);
 
 export default router;

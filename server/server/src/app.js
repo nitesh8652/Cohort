@@ -12,6 +12,7 @@ import { notFound, errorHandler } from "./middlewares/error.middleware.js";
 const app = express();
 
 app.use(express.json());
+app.use((req, _res, next) => { if (req.body === undefined) req.body = {}; next(); });
 app.use(cookieParser());
 app.use(morgan("dev"));
 
