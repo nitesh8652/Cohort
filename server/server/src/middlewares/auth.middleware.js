@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const env = require("../config/env");
+import jwt from "jsonwebtoken";
+import env from "../config/env.js";
 
 // Verifies the access token from the "Authorization: Bearer <token>" header.
 // The refresh token cookie is NOT used here.
@@ -35,4 +35,4 @@ function authorize(...roles) {
   };
 }
 
-module.exports = { authUser, authorize };
+export { authUser, authorize };

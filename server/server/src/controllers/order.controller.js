@@ -1,8 +1,8 @@
-const Order = require("../models/order.model");
-const Restaurant = require("../models/restaurant.model");
-const MenuItem = require("../models/menuItem.model");
-const getPagination = require("../utils/pagination");
-const findOwnedRestaurant = require("../utils/ownership");
+import Order from "../models/order.model.js";
+import Restaurant from "../models/restaurant.model.js";
+import MenuItem from "../models/menuItem.model.js";
+import getPagination from "../utils/pagination.js";
+import findOwnedRestaurant from "../utils/ownership.js";
 
 const PAYMENT_METHODS = ["upi", "card", "cod"];
 
@@ -148,4 +148,4 @@ async function updateOrderStatus(req, res) {
   res.json({ order });
 }
 
-module.exports = { createOrder, getMyOrders, getRestaurantOrders, updateOrderStatus };
+export { createOrder, getMyOrders, getRestaurantOrders, updateOrderStatus };

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // GeoJSON point. Coordinates are [longitude, latitude] (longitude first!).
 const pointSchema = new mongoose.Schema(
@@ -29,4 +29,4 @@ const restaurantSchema = new mongoose.Schema(
   { timestamps: { createdAt: true, updatedAt: false } }
 );
 
-module.exports = mongoose.model("Restaurant", restaurantSchema);
+export default mongoose.model("Restaurant", restaurantSchema);

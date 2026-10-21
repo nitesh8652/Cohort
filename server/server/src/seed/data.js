@@ -203,7 +203,7 @@ const REVIEW_COMMENTS = {
   5: ["Loved it! Best in town.", "Absolutely delicious, ghar jaisa khana.", "Superb taste and very fresh.", "Perfect every single time!", "Paisa vasool!"],
 };
 
-module.exports = {
+export {
   CITIES,
   CUISINES,
   DISHES,

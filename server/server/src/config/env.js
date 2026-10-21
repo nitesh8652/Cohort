@@ -1,6 +1,7 @@
 // The ONLY place that reads process.env.
-// Every other file does: const env = require("../config/env");
-require("dotenv").config({ quiet: true });
+// Every other file does: import env from "../config/env.js";
+import dotenv from "dotenv";
+dotenv.config({ quiet: true });
 
 // Reads a positive whole number, or returns the fallback
 function readCount(name, fallback) {
@@ -30,4 +31,4 @@ const env = {
 };
 
 // Freeze so no file can change a setting by accident
-module.exports = Object.freeze(env);
+export default Object.freeze(env);

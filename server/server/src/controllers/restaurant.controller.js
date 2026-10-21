@@ -1,7 +1,9 @@
-const Restaurant = require("../models/restaurant.model");
-const MenuItem = require("../models/menuItem.model");
-const getPagination = require("../utils/pagination");
-const findOwnedRestaurant = require("../utils/ownership");
+import mongoose from "mongoose";
+import MenuItem from "../models/menuItem.model.js";
+import getPagination from "../utils/pagination.js";
+import findOwnedRestaurant from "../utils/ownership.js";
+import Order from "../models/order.model.js";
+import Restaurant from "../models/restaurant.model.js";
 
 // Turns lng/lat from the request body into a GeoJSON point (or null if invalid)
 function buildLocation(lng, lat) {
@@ -107,10 +109,79 @@ async function deleteRestaurant(req, res) {
   res.json({ message: "Restaurant deleted" });
 }
 
-module.exports = {
+async function getRestaurantRevenue(req, res) {
+
+  const id = req.params.id;
+  const to = req.query.to ? new Date(req.query.to) : new Date();
+  const from = req.query.from
+    ? new Date(req.query.from)
+    : new Date(to.getTime() - 7 * 24 * 60 * 60 * 1000);
+  from.setUTCHours(0, 0, 0, 0,) // default to last 30 days
+
+  const response = await Order.aggregate([
+    [
+      {
+        '$match': {
+          'restaurant': new mongoose.Types.ObjectId(id),
+          'status': 'delivered',
+          'createdAt': {
+            '$gte': new Date('Tue, 13 Oct 2026 00:00:00 GMT')
+          }
+        }
+      }, {
+        '$group': {
+          '_id': {
+            '$dateToString': {
+              'format': '%Y-%m-%d',
+              'date': '$createdAt'
+            }
+          },
+          'revenue': {
+            '$sum': '$totalAmount'
+          }
+        }
+      }, {
+        '$sort': {
+          '_id': 1
+        }
+      }, {
+        '$project': {
+          'date': '$_id',
+          'revenue': 1,
+          '_id': 0
+        }
+      }, {
+        '$group': {
+          '_id': null,
+          'totalRevenue': {
+            '$sum': '$revenue'
+          },
+          'days': {
+            '$push': '$$ROOT'
+          }
+        }
+      }
+    ]
+  ])
+
+  const revenue = response.length > 0 ? response[0] : {
+    totalRevenue: 0, days: []
+  };
+
+  res.json({
+    message: "Revenue Details",
+    revenue: revenue.totalRevenue,
+    from: from.toISOString().split("T")[0],
+    to: to.toISOString().split("T")[0],
+    days: revenue.days,
+  });
+}
+
+export {
   getRestaurants,
   getRestaurantById,
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
+  getRestaurantRevenue,
 };

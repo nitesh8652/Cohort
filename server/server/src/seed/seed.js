@@ -5,18 +5,18 @@
 // whole documents in memory. For every user, restaurant and menu item it only
 // remembers a few numbers (in typed arrays like Uint32Array) and streams the
 // documents into MongoDB 5,000 at a time.
-const env = require("../config/env");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const { fakerEN_IN: faker } = require("@faker-js/faker");
+import env from "../config/env.js";
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import { fakerEN_IN as faker } from "@faker-js/faker";
 
-const connectDB = require("../config/db");
-const User = require("../models/user.model");
-const Restaurant = require("../models/restaurant.model");
-const MenuItem = require("../models/menuItem.model");
-const Order = require("../models/order.model");
-const Review = require("../models/review.model");
-const {
+import connectDB from "../config/db.js";
+import User from "../models/user.model.js";
+import Restaurant from "../models/restaurant.model.js";
+import MenuItem from "../models/menuItem.model.js";
+import Order from "../models/order.model.js";
+import Review from "../models/review.model.js";
+import {
   CITIES,
   CUISINES,
   DISHES,
@@ -25,7 +25,7 @@ const {
   NAME_SUFFIXES,
   HOUR_WEIGHTS,
   REVIEW_COMMENTS,
-} = require("./data");
+} from "./data.js";
 
 // ---------------------------------------------------------------------------
 // Settings (counts can be changed with env variables, see .env.example)

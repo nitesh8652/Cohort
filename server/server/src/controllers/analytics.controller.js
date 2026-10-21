@@ -242,7 +242,7 @@ async function getNearbyRestaurants(req, res) {
   notImplemented(req, res);
 }
 
-module.exports = {
+export {
   getRevenue,
   getTopDishes,
   getPeakHours,

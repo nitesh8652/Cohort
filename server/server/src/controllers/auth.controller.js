@@ -1,13 +1,13 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const env = require("../config/env");
-const User = require("../models/user.model");
-const {
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import env from "../config/env.js";
+import User from "../models/user.model.js";
+import {
   generateAccessToken,
   generateRefreshToken,
   hashRefreshToken,
   compareRefreshToken,
-} = require("../utils/token");
+} from "../utils/token.js";
 
 const REFRESH_COOKIE = "refreshToken";
 
@@ -166,4 +166,4 @@ async function getMe(req, res) {
   res.json({ user: toPublicUser(user) });
 }
 
-module.exports = { register, login, refresh, logout, getMe };
+export { register, login, refresh, logout, getMe };

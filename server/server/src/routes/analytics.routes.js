@@ -1,5 +1,5 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getRevenue,
   getTopDishes,
   getPeakHours,
@@ -10,8 +10,8 @@ const {
   getMonthlyTrend,
   searchRestaurants,
   getNearbyRestaurants,
-} = require("../controllers/analytics.controller");
-const { authUser, authorize } = require("../middlewares/auth.middleware");
+} from "../controllers/analytics.controller.js";
+import { authUser, authorize } from "../middlewares/auth.middleware.js";
 
 // This router is mounted at /api (see app.js), so paths below are full paths.
 const router = express.Router();
@@ -34,4 +34,4 @@ router.get("/analytics/platform/monthly-trend", authUser, getMonthlyTrend);
 router.get("/restaurants/search", searchRestaurants);
 router.get("/restaurants/nearby", getNearbyRestaurants);
 
-module.exports = router;
+export default router;

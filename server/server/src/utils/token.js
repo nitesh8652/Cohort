@@ -1,7 +1,7 @@
-const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const env = require("../config/env");
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import env from "../config/env.js";
 
 // Short-lived token sent in the "Authorization: Bearer <token>" header.
 function generateAccessToken(user) {
@@ -36,7 +36,7 @@ async function compareRefreshToken(token, hash) {
   return bcrypt.compare(digest(token), hash);
 }
 
-module.exports = {
+export {
   generateAccessToken,
   generateRefreshToken,
   hashRefreshToken,

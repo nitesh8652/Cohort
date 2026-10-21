@@ -1,13 +1,13 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const morgan = require("morgan");
+import express from "express";
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
 
-const authRoutes = require("./routes/auth.routes");
-const restaurantRoutes = require("./routes/restaurant.routes");
-const orderRoutes = require("./routes/order.routes");
-const reviewRoutes = require("./routes/review.routes");
-const analyticsRoutes = require("./routes/analytics.routes");
-const { notFound, errorHandler } = require("./middlewares/error.middleware");
+import authRoutes from "./routes/auth.routes.js";
+import restaurantRoutes from "./routes/restaurant.routes.js";
+import orderRoutes from "./routes/order.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
+import analyticsRoutes from "./routes/analytics.routes.js";
+import { notFound, errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
@@ -32,4 +32,4 @@ app.use("/api/reviews", reviewRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

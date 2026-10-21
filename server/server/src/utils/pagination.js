@@ -6,4 +6,4 @@ function getPagination(query, defaultLimit = 10, maxLimit = 50) {
   return { page, limit, skip };
 }
 
-module.exports = getPagination;
+export default getPagination;

@@ -1,6 +1,6 @@
-const Restaurant = require("../models/restaurant.model");
-const MenuItem = require("../models/menuItem.model");
-const findOwnedRestaurant = require("../utils/ownership");
+import Restaurant from "../models/restaurant.model.js";
+import MenuItem from "../models/menuItem.model.js";
+import findOwnedRestaurant from "../utils/ownership.js";
 
 // GET /api/restaurants/:id/menu?category=Starters&isVeg=true
 async function getMenu(req, res) {
@@ -80,4 +80,4 @@ async function deleteMenuItem(req, res) {
   res.json({ message: "Menu item deleted" });
 }
 
-module.exports = { getMenu, createMenuItem, updateMenuItem, deleteMenuItem };
+export { getMenu, createMenuItem, updateMenuItem, deleteMenuItem };

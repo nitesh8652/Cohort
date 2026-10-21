@@ -1,15 +1,16 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getRestaurants,
   getRestaurantById,
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
-} = require("../controllers/restaurant.controller");
-const { getMenu, createMenuItem, updateMenuItem, deleteMenuItem } = require("../controllers/menu.controller");
-const { getRestaurantOrders } = require("../controllers/order.controller");
-const { getRestaurantReviews } = require("../controllers/review.controller");
-const { authUser, authorize } = require("../middlewares/auth.middleware");
+  getRestaurantRevenue,
+} from "../controllers/restaurant.controller.js";
+import { getMenu, createMenuItem, updateMenuItem, deleteMenuItem } from "../controllers/menu.controller.js";
+import { getRestaurantOrders } from "../controllers/order.controller.js";
+import { getRestaurantReviews } from "../controllers/review.controller.js";
+import { authUser, authorize } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -32,4 +33,6 @@ router.get("/:id/orders", authUser, authorize("owner"), getRestaurantOrders);
 // Reviews of a restaurant
 router.get("/:id/reviews", getRestaurantReviews);
 
-module.exports = router;
+router.get("/:id/revenue", authUser, authorize("owner"), getRestaurantRevenue);
+
+export default router;

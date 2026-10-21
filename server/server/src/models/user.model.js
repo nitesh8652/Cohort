@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // NOTE: no indexes in any model on purpose (no unique, no index: true).
 // Duplicate emails are checked in the register controller instead.
@@ -15,4 +15,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: { createdAt: true, updatedAt: false } }
 );
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

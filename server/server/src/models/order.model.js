@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // Name and price are copied from the menu item when the order is placed,
 // so old orders stay correct even if the menu changes later.
@@ -37,4 +37,4 @@ const orderSchema = new mongoose.Schema(
 
 const order = mongoose.model("Order", orderSchema);
 order.createIndexes({ restaurant: 1 });
-module.exports = order;
+export default order;

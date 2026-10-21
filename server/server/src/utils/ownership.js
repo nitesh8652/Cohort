@@ -1,4 +1,4 @@
-const Restaurant = require("../models/restaurant.model");
+import Restaurant from "../models/restaurant.model.js";
 
 // Loads a restaurant and checks that it belongs to the logged-in owner.
 // Returns { restaurant } on success or { error: { status, message } } on failure.
@@ -15,4 +15,4 @@ async function findOwnedRestaurant(restaurantId, userId) {
   return { restaurant };
 }
 
-module.exports = findOwnedRestaurant;
+export default findOwnedRestaurant;

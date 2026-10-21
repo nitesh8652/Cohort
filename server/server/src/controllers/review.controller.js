@@ -1,7 +1,7 @@
-const Review = require("../models/review.model");
-const Order = require("../models/order.model");
-const Restaurant = require("../models/restaurant.model");
-const getPagination = require("../utils/pagination");
+import Review from "../models/review.model.js";
+import Order from "../models/order.model.js";
+import Restaurant from "../models/restaurant.model.js";
+import getPagination from "../utils/pagination.js";
 
 // POST /api/reviews  (customer)
 // Body: { orderId, rating, comment }
@@ -65,4 +65,4 @@ async function getRestaurantReviews(req, res) {
   res.json({ page, limit, total, totalPages: Math.ceil(total / limit), reviews });
 }
 
-module.exports = { createReview, getRestaurantReviews };
+export { createReview, getRestaurantReviews };
