@@ -22,5 +22,5 @@ const model = new ChatGroq({
 while(true){
     const userInput = await readline.question("Enter your query: ");
      const response = await model.invoke(userInput);
-     console.log("Response: ", response);
+     console.log("Response: ", response.content);
 }
