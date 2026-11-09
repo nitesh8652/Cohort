@@ -76,8 +76,6 @@ const deleteEvent = tool(
     }
 )
 
-
-
 const getEventTool = tool(
     async function ({ }) {
         return events
@@ -106,20 +104,24 @@ const agent = createAgent({
     ]
 })
 
+const messages = []
+
 while (true) {
     const userInput = await readline.question("Enter Your Query: ")
 
+    messages.push({
+        role:"user",
+        content: userInput
+    })
+
     const response = await agent.stream(
         {
-            messages: [
-                {
-                    role: "user",
-                    content: userInput
-                },
-            ]
+            messages
         },
         { streamMode: "messages" }
     )
+
+    let reply = ""
 
     for await (const [chunk] of response) {
         const content = typeof chunk.content === "string"
@@ -127,7 +129,10 @@ while (true) {
             : Array.isArray(chunk.content)
                 ? chunk.content.map(part => part.text ?? "").join("")
                 : ""
+                reply +=content
         process.stdout.write(content)
     }
     process.stdout.write("\n")
+    messages.push({role:"assistant", content:"reply"
+    })
 }
