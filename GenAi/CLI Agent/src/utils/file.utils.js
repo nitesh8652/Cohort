@@ -41,7 +41,7 @@ export async function saveApiKey(apikey) {
 
 export async function getApiKey() {
     const settings = await getSettingsFile()
-    return settings.apikey || null
+    const apikey = settings.apikey || null
 
     if (!apikey) {
         return {
@@ -50,8 +50,15 @@ export async function getApiKey() {
     }
 
     try {
-       const response = await axios.get
+        const response = await axios.get("https://api.groq.com/openai/v1/models", {
+            headers: {
+                "Authorization": `Bearer ${apikey}`
+            }
+        })
+        return {
+            apikey
+        }
     } catch (err) {
-
+        return { error: "INVALID API KEY" }
     }
 }
