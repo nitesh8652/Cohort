@@ -49,6 +49,7 @@ await index.documents.upsert({
             embedding: vector,
             content: chunks[index]
         }
+        
     })
 })
 
