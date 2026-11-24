@@ -1,15 +1,19 @@
 import { ChatGroq } from "@langchain/groq"
 import { getApiKey } from '../utils/file.utils.js'
 import { AIMessage } from 'langchain'
+import { upsertFilesTool } from "../tools/file.tools.js"
 
 export async function LLMNODE(state) {
-    const { apikey, error } = await getApiKey()
-    if (error) throw new Error(error)
+    // const { apikey, error } = await getApiKey()
+    // if (error) throw new Error(error)
 
     const model = new ChatGroq({
         model: "openai/gpt-oss-120b",
         apiKey: apikey,
     })
+
+    const modelWithTool = model.bindTools([upsertFilesTool])
+
     const stream = await model.stream(state.messages)
 
     process.stdout.write("AI: ")
