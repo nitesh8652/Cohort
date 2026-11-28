@@ -1,8 +1,10 @@
 import { ChatGroq } from "@langchain/groq"
 import { getApiKey } from '../utils/file.utils.js'
 import { AIMessage } from 'langchain'
-import { upsertFilesTool } from "../tools/file.tools.js"
+import { upsertFiles } from "../tools/file.tools.js"
+import * as fileTools from '../tools/file.tools.js'
 
+//node for state graph
 export async function LLMNODE(state) {
     // const { apikey, error } = await getApiKey()
     // if (error) throw new Error(error)
@@ -12,7 +14,7 @@ export async function LLMNODE(state) {
         apiKey: apikey,
     })
 
-    const modelWithTool = model.bindTools([upsertFilesTool])
+    const modelWithTool = model.bindTools([upsertFiles])
 
     const stream = await model.stream(state.messages)
 
@@ -21,13 +23,35 @@ export async function LLMNODE(state) {
     let aiMessage = ''
     for await (const chunk of stream) {
         process.stdout.write(chunk.text)
-        aiMessage += chunk.text
+        if (!aiMessage) aiMessage = chunk
+        else aiMessage = aiMessage.concat(chunk)
     }
     process.stdout.write("\n")
     return {
         messages: [
             ...state.messages,
-            new AIMessage(aiMessage)
+            new aiMessage
         ]
     }
 }   
+
+//handles tool calls from ai 
+
+export async function TOOLNODE(state, config){
+    const messages = state.messages
+    const lastMessage = state.messages[state.messages - 1]
+    const toolCalls = lastMessage.tool_calls
+
+    const toolResults = await Promise.all(toolCalls.map(async toolCall =>{
+        return await fileTools[toolCall.name].invoke(toolCall)
+        
+    }))
+
+
+    return{
+        messages:[
+            ...state.messages,
+            ...toolResults
+        ]
+    }
+}

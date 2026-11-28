@@ -1,7 +1,7 @@
 import { context, Tool } from "langchain";
 import * as z from zod
 
-export const upsertFilesTool = tool(
+export const upsertFiles = tool(
     async function ({ files }) {
         await Promise.all(files.map(async file => {
             return await fs.writeFile(file.path, file.content)
@@ -19,3 +19,5 @@ export const upsertFilesTool = tool(
         })
     }
 )
+
+// export const deleteFilesTool = tool{}
